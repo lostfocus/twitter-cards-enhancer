@@ -27,6 +27,10 @@ function twitter_cards_enhancer_cards($twitter_card){
 	if(is_array($twitter_card)){
 		$site_twitter = get_option( 'site_twitter', '' );
 		if(trim($site_twitter) != ''){
+			if(substr($site_twitter,0,4) == 'http'){
+				$url = parse_url($site_twitter);
+				$site_twitter = substr($url['path'],1);
+			}
 			$f = substr($site_twitter,0,1);
 			if($f != "@"){
 				$site_twitter = "@" . $site_twitter;
@@ -35,6 +39,10 @@ function twitter_cards_enhancer_cards($twitter_card){
 		}
 		$author = get_the_author_meta('twitter');
 		if(trim($author) != ''){
+			if(substr($author,0,4) == 'http'){
+				$url = parse_url($author);
+				$author = substr($url['path'],1);
+			}
 			$f = substr($author,0,1);
 			if($f != "@"){
 				$author = "@" . $author;
